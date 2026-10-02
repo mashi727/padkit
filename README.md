@@ -11,6 +11,14 @@ SPD（Simple PAD Description）で書いた手順・計画を PAD（Problem Anal
 2 次元の図としてそのまま見える。構造が見えれば、欠陥（本流の途中の終端、反復の欠如、
 片道の分岐）も形のずれとして見えてくる。
 
+## 考え方
+
+何が問題で、それをどう解いているかを PAD（問題分析図）で示します。各段の詳細は下の各節を参照してください。
+
+<img src="docs/pad/concept.png" alt="考え方の PAD。手順や計画の構造を見えるようにするため、SPD で書き、padkit lint で検査して error を直し、PAD に描き、図を見て構造の欠陥を探す" width="100%">
+
+<sub>図の元は [`docs/pad/concept.spd`](docs/pad/concept.spd)。[padkit](https://github.com/mashi727/padkit) で検査・描画しています。</sub>
+
 ## PAD の考え方 — 原典から
 
 PAD は日立製作所で発明され、1979 年に公表された図式である[^futamura]。その開発思想を、

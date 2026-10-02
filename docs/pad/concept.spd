@@ -1,0 +1,25 @@
+手順や計画の構造を見えるようにする
+	:comment 問題：散文の手順は構造が見えない
+	:comment 方針：SPD を検査してから PAD に描く
+	手順を SPD で書く
+		:if LLM に書かせるか
+			Skill で文法と規則を読ませる@$ ln -s "$PWD/skill"@  ~/.claude/skills/spd
+		:else
+			1 行 1 箱、タブで字下げする
+	SPD を検査する
+		:if スペースで字下げしたか
+			タブに直す@$ padkit fix-indent -w plan.spd
+		:else
+			そのまま検査へ進む
+		規則と AST の突き合わせで@黙殺を見つける@$ padkit lint plan.spd
+		:while error が残るか
+			人が SPD を直して検査し直す
+	:comment lint を通らない入力は描かない
+	PAD に描く
+		:if 紙に綴じるか
+			$ padkit pdf plan.spd -o plan.pdf
+		:else
+			$ padkit svg plan.spd -o plan.svg
+	人が図を見て構造の欠陥を探す
+		本流の途中の終端、反復の欠如、@片道の分岐を見る
+	:terminal 構造が見える図
