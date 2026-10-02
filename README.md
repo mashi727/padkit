@@ -13,7 +13,7 @@ SPD（Simple PAD Description）で書いた手順・計画を PAD（Problem Anal
 
 ## 考え方
 
-何が問題で、それをどう解いているかを PAD（問題分析図）で示します。各段の詳細は下の各節を参照してください。
+何が課題で、それをどう解いているかを PAD（問題分析図）で示します。各段の詳細は下の各節を参照してください。
 
 <img src="docs/pad/concept.png" alt="考え方の PAD。手順や計画の構造を見えるようにするため、SPD で書き、padkit lint で検査して error を直し、PAD に描き、図を見て構造の欠陥を探す" width="100%">
 
