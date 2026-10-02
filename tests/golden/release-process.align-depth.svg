@@ -1,0 +1,188 @@
+<svg width="869.5" height="635.2" viewBox="0 0 869.5 635.2" xmlns="http://www.w3.org/2000/svg">
+    <title>
+        リリースを行う
+	:comment 準備
+	リリース対象のコミットを定める
+	:call 変更履歴を作成する
+	:comment 検証
+	:while 未解決の不具合が残っているか
+		不具合を一件選ぶ
+		:if 今回のリリースで直すべきか
+			修正して回帰テストを追加する
+		:else
+			次版のマイルストーンへ移す
+	:dowhile CI が失敗しているか
+		CI の失敗原因を調べて直す
+	:comment 公開
+	:switch 公開先はどこか
+	:case PyPI
+		wheel と sdist をアップロードする
+	:case 社内配布
+		社内レジストリへ登録する
+	:if 公開後の動作確認に失敗したか
+		直前の版へ戻す@原因を記録する
+	:else
+		リリースノートを公開する
+	:terminal 完了
+    </title>
+    <rect x="0" y="0" width="869.5" height="635.2" fill="none"/>
+    <g transform="translate(20.0, 20.0)">
+        <g transform="translate(0.0, 0.0)">
+            <rect x="0" y="0" width="111.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+            <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                リリースを行う
+            </text>
+            <g transform="translate(131.0, 0.0)">
+                <g transform="translate(0.0, 0.0)">
+                    <text x="10.0" y="13.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        (準備)
+                    </text>
+                </g>
+                <line x1="0.0" y1="0.0" x2="0.0" y2="61.2" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 25.6)">
+                    <rect x="0" y="0" width="222.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        リリース対象のコミットを定める
+                    </text>
+                </g>
+                <line x1="0.0" y1="25.6" x2="0.0" y2="106.8" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 71.2)">
+                    <rect x="0" y="0" width="222.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <line x1="5.0" y1="0.0" x2="5.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <line x1="217.0" y1="0.0" x2="217.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        変更履歴を作成する
+                    </text>
+                </g>
+                <line x1="0.0" y1="71.2" x2="0.0" y2="132.4" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 116.8)">
+                    <text x="10.0" y="13.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        (検証)
+                    </text>
+                </g>
+                <line x1="0.0" y1="116.8" x2="0.0" y2="178.0" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 142.4)">
+                    <rect x="0" y="0" width="222.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <line x1="5.0" y1="0.0" x2="5.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        未解決の不具合が残っているか
+                    </text>
+                    <g transform="translate(242.0, 0.0)">
+                        <g transform="translate(0.0, 0.0)">
+                            <rect x="0" y="0" width="234.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                            <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                                不具合を一件選ぶ
+                            </text>
+                        </g>
+                        <line x1="0.0" y1="0.0" x2="0.0" y2="96.8" stroke="#142850" stroke-width="1.0"/>
+                        <g transform="translate(0.0, 45.6)">
+                            <g transform="translate(254.5, 0.0)">
+                                <rect x="0" y="0" width="202.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                                <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                                    修正して回帰テストを追加する
+                                </text>
+                            </g>
+                            <line x1="234.5" y1="0.0" x2="254.5" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                            <g transform="translate(254.5, 51.2)">
+                                <rect x="0" y="0" width="202.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                                <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                                    次版のマイルストーンへ移す
+                                </text>
+                            </g>
+                            <line x1="234.5" y1="51.2" x2="254.5" y2="51.2" stroke="#142850" stroke-width="1.0"/>
+                            <polygon points="0.0,0.0 234.5,0.0 214.5,25.6 234.5,51.2 0.0,51.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                            <text x="209.5" y="18.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                            <text x="209.5" y="43.6" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                            <text x="5.0" y="30.8" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                                今回のリリースで直すべきか
+                            </text>
+                        </g>
+                    </g>
+                    <line x1="222.0" y1="0.0" x2="242.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                </g>
+                <line x1="0.0" y1="142.4" x2="0.0" y2="320.4" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 284.8)">
+                    <rect x="0" y="0" width="222.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <line x1="217.0" y1="0.0" x2="217.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        CI が失敗しているか
+                    </text>
+                    <g transform="translate(242.0, 0.0)">
+                        <rect x="0" y="0" width="234.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            CI の失敗原因を調べて直す
+                        </text>
+                    </g>
+                    <line x1="222.0" y1="0.0" x2="242.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                </g>
+                <line x1="0.0" y1="284.8" x2="0.0" y2="346.0" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 330.4)">
+                    <text x="10.0" y="13.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        (公開)
+                    </text>
+                </g>
+                <line x1="0.0" y1="330.4" x2="0.0" y2="407.2" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 356.0)">
+                    <g transform="translate(242.0, 0.0)">
+                        <rect x="0" y="0" width="234.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            wheel と sdist をアップロードする
+                        </text>
+                    </g>
+                    <line x1="222.0" y1="0.0" x2="242.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                    <g transform="translate(242.0, 51.2)">
+                        <rect x="0" y="0" width="234.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            社内レジストリへ登録する
+                        </text>
+                    </g>
+                    <line x1="222.0" y1="51.2" x2="242.0" y2="51.2" stroke="#142850" stroke-width="1.0"/>
+                    <polygon points="0.0,0.0 222.0,0.0 202.0,25.6 222.0,51.2 0.0,51.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="171.0" y="18.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        PyPI
+                    </text>
+                    <text x="145.0" y="43.6" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        社内配布
+                    </text>
+                    <text x="5.0" y="30.8" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        公開先はどこか
+                    </text>
+                </g>
+                <line x1="0.0" y1="356.0" x2="0.0" y2="514.0" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 452.8)">
+                    <g transform="translate(242.0, 0.0)">
+                        <rect x="0" y="0" width="234.5" height="51.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            直前の版へ戻す
+                        </text>
+                        <text x="10.0" y="23.0" dy="15.6" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            原因を記録する
+                        </text>
+                    </g>
+                    <line x1="222.0" y1="0.0" x2="242.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                    <g transform="translate(242.0, 61.2)">
+                        <rect x="0" y="0" width="234.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            リリースノートを公開する
+                        </text>
+                    </g>
+                    <line x1="222.0" y1="61.2" x2="242.0" y2="61.2" stroke="#142850" stroke-width="1.0"/>
+                    <polygon points="0.0,0.0 222.0,0.0 202.0,30.6 222.0,61.2 0.0,61.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="197.0" y="18.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                    <text x="197.0" y="53.6" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                    <text x="5.0" y="35.8" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        公開後の動作確認に失敗したか
+                    </text>
+                </g>
+                <line x1="0.0" y1="452.8" x2="0.0" y2="577.4" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 559.6)">
+                    <rect x="0" y="0" width="222.0" height="35.6" rx="17.8" ry="17.8" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="17.8" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        完了
+                    </text>
+                </g>
+            </g>
+            <line x1="111.0" y1="0.0" x2="131.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+        </g>
+    </g>
+</svg>

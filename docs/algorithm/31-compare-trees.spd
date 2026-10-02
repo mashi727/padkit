@@ -1,0 +1,18 @@
+# padtools_ts との突き合わせ（src/padkit/engine.py, cli.cross_check）
+二つの木を比較する
+	:if 型が異なるか
+		:terminal 食い違いを返す
+	:switch 値の型は何か
+	:case 辞書
+		:while 未比較のキーがあるか
+			キーの値を再帰的に比較する
+	:case 配列
+		:if 長さが異なるか
+			:terminal 食い違いを返す
+		:else
+			:while 未比較の要素があるか
+				要素を再帰的に比較する
+	:case その他
+		:if 値が異なるか
+			:terminal 食い違いを返す
+	:terminal 一致を返す

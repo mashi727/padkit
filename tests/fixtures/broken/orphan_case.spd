@@ -1,0 +1,4 @@
+# expect: E111
+親
+	:case A
+		処理

@@ -1,0 +1,26 @@
+[project]
+name = "padkit"
+version = "0.1.0"
+description = "SPD (Simple PAD Description) toolchain: lint that catches silent breakage, SVG/PDF rendering via padtools_ts"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "cairosvg>=2.7",
+    "pypdf>=5.0",
+]
+
+[project.scripts]
+padkit = "padkit.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["uv_build>=0.8,<0.13"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

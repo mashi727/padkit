@@ -1,0 +1,13 @@
+# full-line comments are ignored
+行内マークアップ
+	一行目@二行目
+	行末の @ で@
+			次の物理行へ続ける
+	メールは user\@example.com
+	# indented comment
+	:if 条件 A かつ@条件 B か
+		両方を満たす処理
+	:else
+		何もしない
+	:call 別の図
+		呼び出し先の要約

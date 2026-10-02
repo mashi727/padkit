@@ -1,0 +1,8 @@
+# expect: E112
+親
+	:switch 種別
+	:case A
+		一
+	:case A
+		二
+	後続

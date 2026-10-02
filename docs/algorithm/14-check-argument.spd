@@ -1,0 +1,11 @@
+# SPD の解析（src/padkit/spd.py）。padtools_ts から独立した基準パーサ
+引数を検査する
+	:if 命令が else か
+		:if 引数が「#」で始まるか
+			E109 を出す
+		:else
+			:if 引数があるか
+				E108 を出す
+	:else
+		:if 引数が空か
+			E107 を出す

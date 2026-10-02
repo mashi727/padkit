@@ -1,0 +1,14 @@
+# 描画（src/padkit/engine.py, patches/0001〜0003）
+padtools_ts で SVG を描く
+	:if 依存が未導入か lock が古いか
+		:terminal 中断：setup --force を求める
+	:if 導入先の dist が古いか
+		vendor の dist を写し直す
+	オプションを CLI 引数に変換する
+	node で cli.js を起動する
+	:if 深さ揃えが指定されたか
+		:call 深さを列に揃えて描く
+	:else
+		子を親の図形の右に描く
+	:call 接続線を引く
+	SVG を受け取る

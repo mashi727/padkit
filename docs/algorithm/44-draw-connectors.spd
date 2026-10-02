@@ -1,0 +1,19 @@
+# 接続線（patches/0002-sequence-line-stops-at-shape.patch, 0003-connector-reaches-terminal.patch）
+接続線を引く
+	:comment 順次処理の縦線（0002）
+	:while 未接続の隣り合う要素があるか
+		:if 上の要素が終端か
+			終端の高さの中央から引く
+		:else
+			上の要素の上端から引く
+		:if 下の要素が終端か
+			終端の高さの中央で止める
+		:else
+			下の要素の図形の下端で止める@（子の部分木は含めない）
+	:comment 子・分岐先への横線（0003）
+	:while 未接続の子があるか
+		親の図形の右端から引く
+		:if 子の先頭が終端か
+			角丸の半径だけ伸ばして@上辺につなぐ
+		:else
+			子の左端で止める

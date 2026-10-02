@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+!src/padkit/_vendor/padtools_ts/dist/
+.vendor-work/
+node_modules/
+out/
+.DS_Store
+resources/

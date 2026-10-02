@@ -1,0 +1,18 @@
+# SPD の解析（src/padkit/spd.py）。padtools_ts から独立した基準パーサ
+兄弟の並びを検査する
+	:while 未検査の文が残っているか
+		:switch 文の種類は何か
+		:case else
+			:if 直前が else の無い if か
+				else ありと記録する
+			:else
+				E110 を出す
+		:case case
+			:if 直前が switch か
+				:if 値が重複するか
+					E112 を出す
+			:else
+				E111 を出す
+		:case その他
+			直前の文として記録する
+		子ブロックを再帰的に検査する

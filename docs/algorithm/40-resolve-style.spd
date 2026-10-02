@@ -1,0 +1,7 @@
+# 描画（src/padkit/presets.py, engine.py, patches/0001-align-depth.patch）
+スタイルを解決する
+	プリセットの値を読み込む
+	:if 書体が指定されたか
+		指定の書体を候補とする
+	:call 書体を選ぶ
+	個別指定の値で上書きする

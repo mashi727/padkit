@@ -1,0 +1,7 @@
+{
+  "repo": "steelpipe75/padtools_ts",
+  "commit": "de37d5dc3253f2c1cdd1c44230772ff6af8295be",
+  "tarball_sha256": "68893c25336f8283f3d80f378dbb28212a5168e3b52a1257e846b8d1a6a596ac",
+  "patches": ["0001-align-depth.patch","0002-sequence-line-stops-at-shape.patch","0003-connector-reaches-terminal.patch"],
+  "vendored_at": "2026-10-02"
+}

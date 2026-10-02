@@ -1,0 +1,118 @@
+--- a/dist/spd/svg-renderer.js
++++ b/dist/spd/svg-renderer.js
+@@ -48,7 +48,17 @@
+     if (!node) {
+         return "";
+     }
+-    const fragment = renderNode(node, safeOptions);
++    let fragment;
++    if (safeOptions.alignDepth) {
++        // padkit: align-depth. Pass 1 measures the widest box per depth,
++        // pass 2 draws every box at its column width.
++        const columnWidths = new Map();
++        renderNode(node, { ...safeOptions, _columnWidths: columnWidths, _depth: 0, _measure: true });
++        fragment = renderNode(node, { ...safeOptions, _columnWidths: columnWidths, _depth: 0, _measure: false });
++    }
++    else {
++        fragment = renderNode(node, safeOptions);
++    }
+     const svgWidth = fragment.width + safeOptions.margin.left + safeOptions.margin.right;
+     const svgHeight = fragment.height + safeOptions.margin.top + safeOptions.margin.bottom;
+     let svg = `<svg `;
+@@ -169,7 +179,22 @@
+     const isRgb = /^rgb\(\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*\)$/.test(value);
+     const isRgba = /^rgba\(\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:0|0?\.\d+|1(?:\.0+)?)\s*\)$/.test(value);
+     return isHex || isNamedColor || isRgb || isRgba ? value : "none";
++}
++// padkit: align-depth helpers
++function alignWidth(width, options) {
++    const widths = options._columnWidths;
++    if (!widths)
++        return width;
++    const depth = options._depth;
++    if (options._measure) {
++        widths.set(depth, Math.max(widths.get(depth) ?? 0, width));
++        return width;
++    }
++    return Math.max(widths.get(depth) ?? width, width);
+ }
++function childOptions(options) {
++    return options._columnWidths ? { ...options, _depth: options._depth + 1 } : options;
++}
+ /**
+  * ASTのノード種別に応じて、対応する描画関数を呼び出す
+  */
+@@ -209,6 +234,7 @@
+     if (node.borderType === "Box") {
+         // 四角形のボックス
+         contentWidth += options.boxPadding.left + options.boxPadding.right;
++        contentWidth = alignWidth(contentWidth, options);
+         contentHeight += options.boxPadding.top + options.boxPadding.bottom;
+         textOffsetY += options.boxPadding.top;
+         const fillColor = options.backgroundColor ?? "none";
+@@ -224,6 +250,7 @@
+         textOffsetY += options.boxPadding.top;
+         const radius = contentHeight / 2; // 高さの半分を丸みの半径とする
+         contentWidth += contentHeight;
++        contentWidth = alignWidth(contentWidth, options);
+         textOffsetX = radius;
+         const fillColor = options.backgroundColor ?? "none";
+         const safeStrokeColor = escapeXmlAttribute(options.strokeColor);
+@@ -248,7 +275,7 @@
+     svg += renderTextSvg(node.text, textOffsetX, textOffsetY, options);
+     let childFragment = null;
+     if (node.childNode) {
+-        childFragment = renderNode(node.childNode, options);
++        childFragment = renderNode(node.childNode, childOptions(options));
+         svg += renderTransformTranslateSvg(options.childNodeOffsetWidth + contentWidth, 0, childFragment.svg);
+         svg += renderLineSvg(contentWidth, 0, options.childNodeOffsetWidth + contentWidth, 0, options);
+     }
+@@ -377,7 +404,7 @@
+         const label = branche.label;
+         const labelSize = measureTextSvgForBranche(label, options);
+         const brancheFragment = branche.node
+-            ? renderNode(branche.node, options)
++            ? renderNode(branche.node, childOptions(options))
+             : null;
+         // サブビューがない場合はサイズ = 0
+         const subViewSize = brancheFragment
+@@ -445,7 +472,7 @@
+     let addChildLineWidth = false;
+     const poly = [];
+     let lasty = 0;
+-    const boxRight = parseFloat((x + conditionSize.width + labelw + options.switchNodeCaseWidth).toFixed(1));
++    const boxRight = parseFloat(alignWidth(x + conditionSize.width + labelw + options.switchNodeCaseWidth, options).toFixed(1));
+     poly.push({ x: x, y: y }); // Pos:A
+     for (const [index, brancheFragment] of brancheFragments.entries()) {
+         const lh_temp = ymap.get(index);
+@@ -493,7 +520,10 @@
+             ly = parseFloat((ly - ls.height / 2).toFixed(1));
+         }
+         // label の描画
+-        svg += renderTextSvgForBranche(label, parseFloat((x + conditionSize.width + labelw - ls.width).toFixed(1)), ly, options);
++        const labelX = options._columnWidths
++            ? boxRight - options.switchNodeCaseWidth - ls.width
++            : x + conditionSize.width + labelw - ls.width;
++        svg += renderTextSvgForBranche(label, parseFloat(labelX.toFixed(1)), ly, options);
+     }
+     // node.text の描画
+     svg += renderTextSvgForBranche(node.text, parseFloat(x.toFixed(1)), parseFloat((lasty / 2 - conditionSize.height / 2).toFixed(1)), options);
+--- a/dist/cli/cli.js
++++ b/dist/cli/cli.js
+@@ -27,6 +27,7 @@
+     .option("--text-color <textColor>", "Text color for the SVG")
+     .option("--line-height <lineHeight>", "Line height for the SVG", parseFloat)
+     .option("--list-render-type <listRenderType>", "List render type for the SVG (Original, TerminalOffset)")
++    .option("--align-depth", "padkit: align boxes of the same depth into columns")
+     .action((options) => {
+     try {
+         let inputContent;
+@@ -75,6 +76,8 @@
+             renderOptions.lineHeight = options.lineHeight;
+         if (options.listRenderType !== undefined)
+             renderOptions.listRenderType = options.listRenderType;
++        if (options.alignDepth)
++            renderOptions.alignDepth = true;
+         if (!options.importAst) {
+             renderOptions.title = inputContent;
+         }

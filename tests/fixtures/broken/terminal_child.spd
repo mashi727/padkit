@@ -1,0 +1,4 @@
+# expect: E105
+親
+	:terminal 終了
+		子の処理

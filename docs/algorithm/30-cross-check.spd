@@ -1,0 +1,11 @@
+# padtools_ts との突き合わせ（src/padkit/engine.py, cli.cross_check）
+エンジンと構造を突き合わせる
+	自前の構造木を AST に変換する
+	:if padtools_ts が受理するか
+		padtools_ts に AST を書き出させる
+		箱の文字と Map 表現を正規化する
+		:call 二つの木を比較する
+		:if 食い違いがあるか
+			E900 を出し位置を示す
+	:else
+		E901 を出す

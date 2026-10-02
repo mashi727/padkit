@@ -1,0 +1,73 @@
+--- a/dist/spd/svg-renderer.js
++++ b/dist/spd/svg-renderer.js
+@@ -277,7 +277,7 @@
+     if (node.childNode) {
+         childFragment = renderNode(node.childNode, childOptions(options));
+         svg += renderTransformTranslateSvg(options.childNodeOffsetWidth + contentWidth, 0, childFragment.svg);
+-        svg += renderLineSvg(contentWidth, 0, options.childNodeOffsetWidth + contentWidth, 0, options);
++        svg += renderLineSvg(contentWidth, 0, options.childNodeOffsetWidth + contentWidth + topInsetOf(childFragment), 0, options);
+     }
+     const totalWidth = parseFloat((contentWidth +
+         (childFragment ? childFragment.width + options.childNodeOffsetWidth : 0)).toFixed(1));
+@@ -287,6 +287,8 @@
+         width: totalWidth,
+         height: totalHeight,
+         shapeHeight: contentHeight, // padkit: own shape, excluding the child subtree
++        // padkit: a rounded terminal's top edge starts one radius in from the left
++        topInset: node.borderType === "WRound" ? contentHeight / 2 : 0,
+         type: node.type,
+     };
+ }
+@@ -483,7 +485,7 @@
+             // brancheFragment.fragment の描画
+             svg += renderTransformTranslateSvg(parseFloat((boxRight + options.childNodeOffsetWidth).toFixed(1)), ly, brancheFragment.fragment.svg);
+             // 小要素への line の描画
+-            svg += renderLineSvg(boxRight, ly, parseFloat((boxRight + options.childNodeOffsetWidth).toFixed(1)), ly, options);
++            svg += renderLineSvg(boxRight, ly, parseFloat((boxRight + options.childNodeOffsetWidth + topInsetOf(brancheFragment.fragment)).toFixed(1)), ly, options);
+             // 小要素への line の分、最後に返す幅を増やす
+             addChildLineWidth = true;
+         }
+@@ -583,6 +585,11 @@
+ function shapeHeightOf(fragment) {
+     return fragment.shapeHeight ?? fragment.height;
+ }
++// padkit: how far right of the fragment origin its outline starts at y = 0, so
++// that a connector ends on the shape instead of short of a rounded corner.
++function topInsetOf(fragment) {
++    return fragment.topInset ?? 0;
++}
+ // == ノード間の接続線の描画関数群 ===
+ /**
+  * 連結ノード（NodeListNode）の描画
+@@ -644,6 +651,7 @@
+         svg: childrenSvg,
+         width: maxWidth,
+         height: totalHeight,
++        topInset: topInsetOf(childFragments[0]),
+         type: "NodeList",
+     };
+ }
+@@ -651,6 +659,7 @@
+     let totalHeight = 0;
+     let maxWidth = 0;
+     let offsetX = 0;
++    let firstX = 0;
+     let topAddWidth = 0;
+     let bottomAddWidth = 0;
+     let currentY = 0;
+@@ -689,6 +698,7 @@
+             if (topChildFragment.type === "Terminal") {
+                 topOffsetX = topAddWidth;
+             }
++            firstX = topOffsetX;
+             childrenSvg += renderTransformTranslateSvg(topOffsetX, currentY, childFragment.svg);
+         }
+         else if (i === childFragments.length - 1) {
+@@ -742,6 +752,7 @@
+         svg: childrenSvg,
+         width: parseFloat((maxWidth + offsetX).toFixed(1)),
+         height: totalHeight,
++        topInset: firstX + topInsetOf(topChildFragment),
+         type: "NodeList",
+     };
+ }

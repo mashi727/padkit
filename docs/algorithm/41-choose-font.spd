@@ -1,0 +1,9 @@
+# 描画（src/padkit/presets.py, engine.py, patches/0001-align-depth.patch）
+書体を選ぶ
+	:while 未検査の候補があるか
+		:if 総称名か
+			:terminal 総称名を採用する
+		静的な Regular を探す@（fc-match）
+		:if 同名で fvar 表が無いか
+			:terminal その書体を採用する
+	:terminal 先頭候補を採用し警告する

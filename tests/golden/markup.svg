@@ -1,0 +1,100 @@
+<svg width="439.5" height="356.0" viewBox="0 0 439.5 356.0" xmlns="http://www.w3.org/2000/svg">
+    <title>
+        # full-line comments are ignored
+行内マークアップ
+	一行目@二行目
+	行末の @ で@
+			次の物理行へ続ける
+	メールは user\@example.com
+	# indented comment
+	:if 条件 A かつ@条件 B か
+		両方を満たす処理
+	:else
+		何もしない
+	:call 別の図
+		呼び出し先の要約
+    </title>
+    <rect x="0" y="0" width="439.5" height="356.0" fill="none"/>
+    <g transform="translate(20.0, 20.0)">
+        <g transform="translate(0.0, 0.0)">
+            <rect x="0" y="0" width="124.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+            <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                行内マークアップ
+            </text>
+            <g transform="translate(144.0, 0.0)">
+                <g transform="translate(0.0, 0.0)">
+                    <rect x="0" y="0" width="59.0" height="51.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        一行目
+                    </text>
+                    <text x="10.0" y="23.0" dy="15.6" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        二行目
+                    </text>
+                </g>
+                <line x1="0.0" y1="0.0" x2="0.0" y2="128.0" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 61.2)">
+                    <rect x="0" y="0" width="137.0" height="66.8" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        行末の
+                    </text>
+                    <text x="10.0" y="23.0" dy="15.6" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        で
+                    </text>
+                    <text x="10.0" y="23.0" dy="31.2" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        次の物理行へ続ける
+                    </text>
+                </g>
+                <line x1="0.0" y1="61.2" x2="0.0" y2="173.6" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 138.0)">
+                    <rect x="0" y="0" width="182.5" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        メールは user@example.com
+                    </text>
+                </g>
+                <line x1="0.0" y1="138.0" x2="0.0" y2="234.8" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 183.6)">
+                    <g transform="translate(131.5, 0.0)">
+                        <rect x="0" y="0" width="124.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            両方を満たす処理
+                        </text>
+                    </g>
+                    <line x1="111.5" y1="0.0" x2="131.5" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                    <g transform="translate(131.5, 51.2)">
+                        <rect x="0" y="0" width="85.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            何もしない
+                        </text>
+                    </g>
+                    <line x1="111.5" y1="51.2" x2="131.5" y2="51.2" stroke="#142850" stroke-width="1.0"/>
+                    <polygon points="0.0,0.0 111.5,0.0 91.5,25.6 111.5,51.2 0.0,51.2" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <text x="86.5" y="18.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                    <text x="86.5" y="43.6" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850"></text>
+                    <text x="5.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        条件 A かつ
+                    </text>
+                    <text x="5.0" y="23.0" dy="15.6" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        条件 B か
+                    </text>
+                </g>
+                <line x1="0.0" y1="183.6" x2="0.0" y2="316.0" stroke="#142850" stroke-width="1.0"/>
+                <g transform="translate(0.0, 280.4)">
+                    <rect x="0" y="0" width="59.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                    <line x1="5.0" y1="0.0" x2="5.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <line x1="54.0" y1="0.0" x2="54.0" y2="35.6" stroke="#142850" stroke-width="1.0"/>
+                    <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                        別の図
+                    </text>
+                    <g transform="translate(79.0, 0.0)">
+                        <rect x="0" y="0" width="124.0" height="35.6" stroke="#142850" stroke-width="1.0" fill="#ffffff"/>
+                        <text x="10.0" y="23.0" dy="0.0" font-family="Noto Sans CJK JP" font-size="13" fill="#142850">
+                            呼び出し先の要約
+                        </text>
+                    </g>
+                    <line x1="59.0" y1="0.0" x2="79.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+                </g>
+            </g>
+            <line x1="124.0" y1="0.0" x2="144.0" y2="0.0" stroke="#142850" stroke-width="1.0"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,48 @@
+--- a/dist/spd/svg-renderer.js
++++ b/dist/spd/svg-renderer.js
+@@ -286,6 +286,7 @@
+         svg: svg,
+         width: totalWidth,
+         height: totalHeight,
++        shapeHeight: contentHeight, // padkit: own shape, excluding the child subtree
+         type: node.type,
+     };
+ }
+@@ -533,6 +534,7 @@
+             subvieww +
+             (addChildLineWidth ? options.childNodeOffsetWidth : 0)).toFixed(1)),
+         height: parseFloat(h.toFixed(1)),
++        shapeHeight: parseFloat(lasty.toFixed(1)), // padkit: polygon bottom
+         type: node.type,
+     };
+ }
+@@ -576,6 +578,11 @@
+     }
+     return renderBrancheFragment(ifBrancheNode, options);
+ }
++// padkit: a sequence line must stop at the next element's own shape, not run
++// down the whole subtree hanging below it.
++function shapeHeightOf(fragment) {
++    return fragment.shapeHeight ?? fragment.height;
++}
+ // == ノード間の接続線の描画関数群 ===
+ /**
+  * 連結ノード（NodeListNode）の描画
+@@ -626,7 +633,7 @@
+                 endY = parseFloat((currentY +
+                     childFragment.height +
+                     options.nodeListSpace +
+-                    childFragments[i + 1].height).toFixed(1));
++                    shapeHeightOf(childFragments[i + 1])).toFixed(1));
+             }
+             childrenSvg += renderLineSvg(0, startY, 0, endY, options);
+             totalHeight = parseFloat((totalHeight + options.nodeListSpace).toFixed(1));
+@@ -724,7 +731,7 @@
+                 endY = parseFloat((currentY +
+                     childFragment.height +
+                     options.nodeListSpace +
+-                    childFragments[i + 1].height).toFixed(1));
++                    shapeHeightOf(childFragments[i + 1])).toFixed(1));
+             }
+             childrenSvg += renderLineSvg(offsetX, startY, offsetX, endY, options);
+             totalHeight = parseFloat((totalHeight + options.nodeListSpace).toFixed(1));

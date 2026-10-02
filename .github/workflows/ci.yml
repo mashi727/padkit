@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: astral-sh/setup-uv@v6
+      - name: System libraries and CJK fonts
+        run: sudo apt-get update && sudo apt-get install -y libcairo2 fonts-noto-cjk poppler-utils
+      - run: uv sync
+      - run: uv run padkit setup
+      - run: uv run padkit info
+      - run: uv run pytest -v
+
+  # Acceptance 4: the PDF looks the same whether or not the viewer has the font.
+  # Rasterise it in one container twice, before and after installing CJK fonts,
+  # so that only the presence of the font differs between the two images.
+  fontless-render:
+    needs: test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: astral-sh/setup-uv@v6
+      - run: sudo apt-get update && sudo apt-get install -y libcairo2 fonts-noto-cjk
+      - run: uv sync && uv run padkit setup
+      - run: mkdir -p out && uv run padkit pdf tests/fixtures/ok/release-process.spd -o out/release.pdf
+      - name: Rasterise without and with fonts in the same container
+        run: |
+          docker run --rm -v "$PWD/out:/out" debian:bookworm-slim sh -ec '
+            apt-get update -qq
+            apt-get install -y -qq --no-install-recommends poppler-utils >/dev/null
+            pdftoppm -r 100 -png -singlefile /out/release.pdf /out/without_fonts
+            apt-get install -y -qq --no-install-recommends fonts-noto-cjk >/dev/null
+            pdftoppm -r 100 -png -singlefile /out/release.pdf /out/with_fonts'
+      - run: cmp out/with_fonts.png out/without_fonts.png

@@ -1,0 +1,28 @@
+# padkit の全体の流れ（src/padkit/cli.py）
+padkit を実行する
+	:switch サブコマンドは何か
+	:case lint
+		:while 未検査のファイルがあるか
+			:call lint を実行する
+			診断と要約を表示する
+		:if 不合格のファイルがあるか
+			:terminal 終了（exit 1）
+		:else
+			:terminal 終了（exit 0）
+	:case svg / pdf
+		:while 未処理のファイルがあるか
+			:call 入力を検査して SVG にする
+		:if サブコマンドが pdf か
+			:call SVG を用紙に配置する
+		:else
+			SVG を書き出す
+	:case ast
+		:call 入力を検査して SVG にする
+		padtools_ts の AST を書き出す
+	:case fix-indent
+		スペース字下げの段の幅を推定する
+		各行の字下げをタブに置き換える
+	:case setup
+		vendor の dist と lock を写す
+		npm ci で依存を導入する
+	:terminal 完了

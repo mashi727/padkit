@@ -1,0 +1,12 @@
+# lint（src/padkit/lint.py, cli.run_lint）
+lint を実行する
+	:call 字句を解析し構造木を組む
+	:call 講評観点を検査する
+	:if エラーがあるか
+		突き合わせを省く
+	:else
+		:if エンジンを使えるか
+			:call エンジンと構造を突き合わせる
+		:else
+			突き合わせを省く
+	診断を位置順に並べる

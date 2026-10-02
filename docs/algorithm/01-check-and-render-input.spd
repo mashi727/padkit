@@ -1,0 +1,18 @@
+# padkit の全体の流れ（src/padkit/cli.py）
+入力を検査して SVG にする
+	入力を読み込む
+	:call スタイルを解決する
+	:if AST の入力か
+		検査を省く
+	:else
+		:if エンジンが導入済みか
+			:call lint を実行する
+		:else
+			:terminal 中断：エンジン未導入（exit 2）
+		:if エラーがあるか
+			診断を標準エラーへ出す
+			:if --force が指定されたか
+				描画へ進む
+			:else
+				:terminal 中断：描画を拒否（exit 1）
+	:call padtools_ts で SVG を描く
